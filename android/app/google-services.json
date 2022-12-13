@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "214172051068",
+    "project_id": "flash-surge-298514",
+    "storage_bucket": "flash-surge-298514.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214172051068:android:37a974fdd063a5b3544bf9",
+        "android_client_info": {
+          "package_name": "com.monday.shopee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214172051068-2th788j08uchcth6b0pk2063b1vthj2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC34r_TeVOiys3navGZ7Cfk5q1m0srV00E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214172051068-2th788j08uchcth6b0pk2063b1vthj2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
