@@ -1,16 +1,24 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:delivery/components/bottombar.dart';
 import 'package:delivery/controller/main_controller.dart';
 import 'package:delivery/router.dart';
-import 'package:delivery/view/home/home.dart';
-import 'package:delivery/view/login.dart';
+
+import 'package:delivery/view/splash/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'controller/cart_controller.dart';
+import 'controller/location_controller.dart';
+import 'controller/order_controller.dart';
+import 'controller/order_controllers.dart';
+
 void main() async {
   Get.lazyPut(() => MainController());
+  Get.lazyPut(() => CartController());
+  Get.lazyPut(() => LocationController());
+  Get.lazyPut(() => OrderController());
+  Get.lazyPut(() => OrderControllers());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BottombarComponent(),
+      home: SplashScreen(),
       getPages: routes(),
     );
   }

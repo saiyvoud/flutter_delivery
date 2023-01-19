@@ -2,6 +2,7 @@
 
 import 'package:delivery/components/banner.dart';
 import 'package:delivery/components/product.dart';
+import 'package:delivery/controller/cart_controller.dart';
 import 'package:delivery/controller/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,7 +50,42 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             actions: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+              Center(
+                child: Stack(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Get.toNamed("/cart");
+                        },
+                        icon: Icon(Icons.shopping_cart)),
+                    GetBuilder<CartController>(builder: (cartController) {
+                      return Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "${cartController.cartModel.length}",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              ),
+              IconButton(
+                  onPressed: () {
+                    controller.logout();
+                  },
+                  icon: Icon(Icons.exit_to_app)),
             ],
           ),
           body: SingleChildScrollView(

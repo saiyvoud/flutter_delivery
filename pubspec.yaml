@@ -41,6 +41,13 @@ dependencies:
   firebase_auth: ^4.1.4
   cloud_firestore: ^4.1.0
   carousel_slider: ^4.1.1
+  lottie: ^2.1.0
+  google_maps_flutter: ^2.2.3
+  location: ^4.4.0
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
+  url_launcher: ^6.1.7
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +74,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/animations/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

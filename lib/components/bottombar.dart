@@ -23,10 +23,6 @@ class _BottombarComponentState extends State<BottombarComponent> {
       height: 200,
       color: Colors.green,
     ),
-    Container(
-      height: 200,
-      color: Colors.blue,
-    ),
   ];
   int currentIndex = 0;
   void _onTap(int index) {
@@ -53,12 +49,8 @@ class _BottombarComponentState extends State<BottombarComponent> {
             label: "home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: "message",
+            icon: Icon(Icons.shopping_bag),
+            label: "order",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

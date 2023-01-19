@@ -19,7 +19,7 @@ class ProductComponent extends StatelessWidget {
       primary: false,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.75,
+        childAspectRatio: 0.7,
       ),
       itemCount: controller.productList.length,
       itemBuilder: (context, index) {
