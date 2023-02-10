@@ -11,14 +11,12 @@ import 'package:get/get.dart';
 import 'controller/cart_controller.dart';
 import 'controller/location_controller.dart';
 import 'controller/order_controller.dart';
-import 'controller/order_controllers.dart';
 
 void main() async {
   Get.lazyPut(() => MainController());
   Get.lazyPut(() => CartController());
   Get.lazyPut(() => LocationController());
   Get.lazyPut(() => OrderController());
-  Get.lazyPut(() => OrderControllers());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());

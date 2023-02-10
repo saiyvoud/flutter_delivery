@@ -137,7 +137,6 @@ class _PaymentViewState extends State<PaymentView> {
                     ],
                   );
                 }),
-
                 Container(
                   height: 10,
                   decoration: BoxDecoration(color: Colors.grey.shade50),
@@ -160,25 +159,48 @@ class _PaymentViewState extends State<PaymentView> {
                   ],
                 ),
                 SizedBox(height: 5),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("ວັນທີ່ຈັດສົ່ງ"),
-                        Text("${locationController.locationList[0].day}"),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("ເວລາຈັດສົ່ງ"),
-                        Text("${locationController.locationList[0].time}"),
-                      ],
-                    ),
-                  ],
-                ),
+                locationController.locationList.isEmpty
+                    ? InkWell(
+                        onTap: () {
+                          Get.toNamed('/address');
+                        },
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'ເພີ່ມເວລາຈັດສົ່ງ',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("ວັນທີ່ຈັດສົ່ງ"),
+                              Text("${locationController.locationList[0].day}"),
+                            ],
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("ເວລາຈັດສົ່ງ"),
+                              Text(
+                                  "${locationController.locationList[0].time}"),
+                            ],
+                          ),
+                        ],
+                      ),
                 SizedBox(height: 10),
                 Container(
                   height: 10,
@@ -206,7 +228,7 @@ class _PaymentViewState extends State<PaymentView> {
                     ),
                   ],
                 ),
-                locationController.locationList.length == 0
+                locationController.locationList.isEmpty
                     ? InkWell(
                         onTap: () {
                           Get.toNamed('/address');
@@ -268,9 +290,7 @@ class _PaymentViewState extends State<PaymentView> {
                           ),
                         ],
                       ),
-
                 SizedBox(height: 10),
-
                 Container(
                   height: 10,
                   decoration: BoxDecoration(color: Colors.grey.shade50),
@@ -322,7 +342,6 @@ class _PaymentViewState extends State<PaymentView> {
                         );
                       });
                 }),
-
                 SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -366,7 +385,6 @@ class _PaymentViewState extends State<PaymentView> {
                   ],
                 ),
                 SizedBox(height: 10),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -380,22 +398,6 @@ class _PaymentViewState extends State<PaymentView> {
                     ),
                   ],
                 ),
-                // Container(
-                //   height: 50,
-                //   width: 200,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(10),
-                //     border: Border.all(
-                //       color: Colors.grey,
-                //     ),
-                //   ),
-                //   child: Center(
-                //     child: Text(
-                //       "ຈ່າຍປາຍທາງ",
-
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           )),

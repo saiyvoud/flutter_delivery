@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/model/product_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../model/user_model.dart';
 
@@ -11,14 +11,20 @@ class MainController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = FirebaseAuth.instance.currentUser;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   final productList = <ProductModel>[].obs;
   final userModel = <UserModel>[].obs;
+
   var isLoading = false.obs;
   var userLoading = false.obs;
+
   @override
   void onInit() async {
     super.onInit();
-    await fecthProduct();
+    if (user != null) {
+      await fecthProduct();
+      await getUser();
+    }
   }
 
   Future<void> getUser() async {
@@ -35,6 +41,7 @@ class MainController extends GetxController {
           lastName: value.data()!['lastName'],
           email: value.data()!['email'],
           phoneNumber: value.data()!['phoneNumber'],
+          profile: value.data()!['profile'],
         ));
         userLoading(false);
         update();
@@ -67,7 +74,7 @@ class MainController extends GetxController {
       update();
     } catch (e) {
       Get.snackbar(
-        "error",
+        "error get Product",
         e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -86,6 +93,7 @@ class MainController extends GetxController {
         Get.snackbar("Login", "Login Successful",
             backgroundColor: Colors.green, colorText: Colors.white);
         await fecthProduct();
+
         Get.offAllNamed('/bottombar');
       });
     } catch (e) {
@@ -104,6 +112,7 @@ class MainController extends GetxController {
           "lastname": lastname,
           "email": email,
           "password": password,
+          "profile": "",
         }).then((value) async {
           Get.snackbar("Register", "Register Successful",
               colorText: Colors.white, backgroundColor: Colors.green);
@@ -123,11 +132,17 @@ class MainController extends GetxController {
     Get.offAllNamed("/login");
   }
 
-  void validateAuth() {
-    if (auth.currentUser == null) {
-      Get.offAllNamed("/login");
-    } else {
-      Get.offAllNamed("/bottombar");
+  Future<void> validateAuth() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    try {
+      if (user == null) {
+        Get.offAllNamed("/login");
+      } else {
+        Get.offAllNamed("/bottombar");
+      }
+    } on Exception catch (e) {
+      rethrow;
     }
   }
 }

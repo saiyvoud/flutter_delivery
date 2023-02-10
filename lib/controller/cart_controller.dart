@@ -20,23 +20,6 @@ class CartController extends GetxController {
     await getTotalPrice();
   }
 
-  // Future<void> removeTotalPrice({required String id}) async {
-  //   try {
-  //     await firestore.collection("cart").doc(id).get().then((value) {
-  //       totalPrice -= value.data()!['amount'] * value.data()!['price'];
-
-  //       update();
-  //     });
-  //   } catch (e) {
-  //     Get.snackbar(
-  //       "erorr get Total cart",
-  //       e.toString(),
-  //       backgroundColor: Colors.red,
-  //       colorText: Colors.white,
-  //     );
-  //   }
-  // }
-
   Future<void> getTotalPrice() async {
     try {
       totalPrice = 0.obs;
@@ -120,7 +103,7 @@ class CartController extends GetxController {
         await getTotalPrice();
         await getCart();
         Get.snackbar(
-          "error delete",
+          "update",
           "update amount in cart successful",
           backgroundColor: Colors.green,
           colorText: Colors.white,

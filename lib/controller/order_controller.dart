@@ -19,6 +19,7 @@ class OrderController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
+        Get.offAllNamed('/bottombar');
       });
     } catch (e) {
       Get.snackbar(

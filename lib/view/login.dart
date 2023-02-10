@@ -13,7 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _showPassword = false;
+  bool showPassword = true;
   final form = GlobalKey<FormState>();
   final email = TextEditingController();
   final password = TextEditingController();
@@ -42,8 +42,10 @@ class _LoginState extends State<Login> {
                   controller: email,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value!.isEmpty || value == null) {
+                    if (value!.isEmpty) {
                       return "email is require";
+                    } else if (!value.contains('@gmail.com')) {
+                      return "ຕ້ອງມີ @gmail.com";
                     }
                     return null;
                   },
@@ -54,11 +56,11 @@ class _LoginState extends State<Login> {
                 ),
                 TextFormField(
                   controller: password,
-                  obscureText: true,
+                  obscureText: showPassword,
                   validator: (value) {
-                    if (value!.isEmpty || value == null) {
+                    if (value!.isEmpty) {
                       return "password is require";
-                    } else if (value.length < 5) {
+                    } else if (value.length < 6) {
                       return "password must not 6 more";
                     }
                     return null;
@@ -68,7 +70,11 @@ class _LoginState extends State<Login> {
                       prefixIcon: Icon(Icons.key),
                       suffixIcon: IconButton(
                         icon: Icon(Icons.visibility),
-                        onPressed: (() {}),
+                        onPressed: () {
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
                       )),
                 ),
                 SizedBox(height: 10),

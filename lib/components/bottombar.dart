@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, prefer_final_fields
 
 import 'package:delivery/view/home/home.dart';
+import 'package:delivery/view/order/order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,14 +16,7 @@ class BottombarComponent extends StatefulWidget {
 class _BottombarComponentState extends State<BottombarComponent> {
   List<Widget> _children = [
     HomeView(),
-    Container(
-      height: 200,
-      color: Colors.red,
-    ),
-    Container(
-      height: 200,
-      color: Colors.green,
-    ),
+    MyOrder(),
   ];
   int currentIndex = 0;
   void _onTap(int index) {
@@ -51,10 +45,6 @@ class _BottombarComponentState extends State<BottombarComponent> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),
             label: "order",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "profile",
           ),
         ],
       ),

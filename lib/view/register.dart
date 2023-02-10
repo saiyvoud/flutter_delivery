@@ -20,7 +20,7 @@ class _RegisterState extends State<Register> {
   final lastName = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
-  final comfirmPassword = TextEditingController();
+  bool eye = true;
   final MainController controller = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _RegisterState extends State<Register> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    hintText: "lastName",
+                    hintText: "firstName",
                     prefixIcon: Icon(Icons.person),
                   ),
                 ),
@@ -74,6 +74,8 @@ class _RegisterState extends State<Register> {
                   validator: (value) {
                     if (value!.isEmpty || value == null) {
                       return "email is require";
+                    } else if (!value.contains('@gmail.com')) {
+                      return "ຕ້ອງມີ @gmail.com";
                     }
                     return null;
                   },
@@ -84,11 +86,11 @@ class _RegisterState extends State<Register> {
                 ),
                 TextFormField(
                   controller: password,
-                  obscureText: true,
+                  obscureText: eye,
                   validator: (value) {
-                    if (value!.isEmpty || value == null) {
+                    if (value!.isEmpty) {
                       return "password is require";
-                    } else if (value.length < 5) {
+                    } else if (value.length < 6) {
                       return "password must not 6 more";
                     }
                     return null;
@@ -98,25 +100,11 @@ class _RegisterState extends State<Register> {
                       prefixIcon: Icon(Icons.key),
                       suffixIcon: IconButton(
                         icon: Icon(Icons.visibility),
-                        onPressed: (() {}),
-                      )),
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: comfirmPassword,
-                  obscureText: true,
-                  validator: (value) {
-                    if (value!.isEmpty || value == null) {
-                      return "comfirmPassword is require";
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                      hintText: "comfirmPassword",
-                      prefixIcon: Icon(Icons.key),
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.visibility),
-                        onPressed: (() {}),
+                        onPressed: () {
+                          setState(() {
+                            eye = !eye;
+                          });
+                        },
                       )),
                 ),
                 SizedBox(height: 10),

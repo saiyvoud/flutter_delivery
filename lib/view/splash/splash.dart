@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:delivery/controller/main_controller.dart';
@@ -18,9 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      controller.validateAuth();
-    });
+
+    controller.validateAuth();
   }
 
   @override

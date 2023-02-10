@@ -6,9 +6,8 @@ import 'package:delivery/controller/cart_controller.dart';
 import 'package:delivery/controller/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-
 import '../../components/menu.dart';
+import '../profile/edit_profile.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -19,11 +18,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final controller = Get.put(MainController());
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  final cartcontroller = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -33,22 +28,51 @@ class _HomeViewState extends State<HomeView> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.purple.shade500,
-            title: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      hintText: "search ...",
-                      prefixIcon: Icon(Icons.search),
-                      border: InputBorder.none),
+            leading: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: InkWell(
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => EditProfile())),
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(50)),
+                  child: controller.userModel[0].profile == ""
+                      ? Image.asset(
+                          "assets/icons/user.png",
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          "${controller.userModel[0].profile}",
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
             ),
+            title: Text(
+              "Monday Shopee",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            // title: Container(
+            //   height: 50,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(20),
+            //     color: Colors.white,
+            //   ),
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 10),
+            //     child: TextFormField(
+            //       decoration: InputDecoration(
+            //           hintText: "search ...",
+            //           prefixIcon: Icon(Icons.search),
+            //           border: InputBorder.none),
+            //     ),
+            //   ),
+            // ),
+
             actions: [
               Center(
                 child: Stack(
