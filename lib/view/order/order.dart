@@ -25,6 +25,11 @@ class _MyOrderState extends State<MyOrder> {
         ),
         centerTitle: true,
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [],
+        ),
+      ),
     );
   }
 }

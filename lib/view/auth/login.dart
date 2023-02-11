@@ -1,32 +1,28 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_null_comparison
+// ignore_for_file: prefer_const_constructors
 
+import 'package:delivery/controller/main_controller.dart';
+import 'package:delivery/view/auth/register.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
-import '../controller/main_controller.dart';
-
-class Register extends StatefulWidget {
-  const Register({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-class _RegisterState extends State<Register> {
+class _LoginState extends State<Login> {
+  bool showPassword = true;
   final form = GlobalKey<FormState>();
-  final firstName = TextEditingController();
-  final lastName = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
-  bool eye = true;
   final MainController controller = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
+        title: Text("Login"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -38,41 +34,15 @@ class _RegisterState extends State<Register> {
               children: [
                 Image.asset("assets/images/Fingerprint-bro.png", height: 200),
                 Text(
-                  "Create your Account",
+                  "Login your Account",
                   style: TextStyle(fontSize: 18),
-                ),
-                TextFormField(
-                  controller: firstName,
-                  validator: (value) {
-                    if (value!.isEmpty || value == null) {
-                      return "firstName is require";
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    hintText: "firstName",
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                ),
-                TextFormField(
-                  controller: lastName,
-                  validator: (value) {
-                    if (value!.isEmpty || value == null) {
-                      return "lastName is require";
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    hintText: "lastName",
-                    prefixIcon: Icon(Icons.person),
-                  ),
                 ),
                 SizedBox(height: 10),
                 TextFormField(
                   controller: email,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value!.isEmpty || value == null) {
+                    if (value!.isEmpty) {
                       return "email is require";
                     } else if (!value.contains('@gmail.com')) {
                       return "ຕ້ອງມີ @gmail.com";
@@ -86,7 +56,7 @@ class _RegisterState extends State<Register> {
                 ),
                 TextFormField(
                   controller: password,
-                  obscureText: eye,
+                  obscureText: showPassword,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "password is require";
@@ -102,7 +72,7 @@ class _RegisterState extends State<Register> {
                         icon: Icon(Icons.visibility),
                         onPressed: () {
                           setState(() {
-                            eye = !eye;
+                            showPassword = !showPassword;
                           });
                         },
                       )),
@@ -111,9 +81,31 @@ class _RegisterState extends State<Register> {
                 InkWell(
                   onTap: () {
                     if (form.currentState!.validate()) {
-                      controller.register(firstName.text, lastName.text,
-                          email.text, password.text);
+                      controller.login(email.text, password.text);
                     }
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 200,
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Center(
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => Register())));
                   },
                   child: Container(
                     height: 60,

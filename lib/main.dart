@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'controller/cart_controller.dart';
 import 'controller/location_controller.dart';
 import 'controller/order_controller.dart';
+import 'view/home/home_page.dart';
 
 void main() async {
   Get.lazyPut(() => MainController());
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: HomePage(),
       getPages: routes(),
     );
   }
